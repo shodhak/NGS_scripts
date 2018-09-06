@@ -21,6 +21,8 @@ module load tabix
 #gzip the vcf file with bgzip command
 bgzip isr_genotypes.vcf
 #The above command makes the file isr_genotypes.vcf.gz
+#make the index file
+tabix -p isr_genotypes.vcf.gz
 
 #Call the variants from the genotypes
 bcftools call --ploidy 1 -vm -Ov isr_genotypes.vcf.gz > isr_variants.vcf
