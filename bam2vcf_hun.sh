@@ -11,9 +11,18 @@ module load BCFtools
 
 #samtools faidx /home/sj577/Documents/test_ngs/ref_genome/pnref_genome.fasta 
 
-#cd /home/sj577/project/samfiles_hun/
+cd /home/sj577/project/samfiles_hun/
 #Compute the genometypes from bam alignment files through mpileup
-#bcftools mpileup -f /home/sj577/Documents/test_ngs/ref_genome/pnref_genome.fasta  *.sorted.bam > hun_genotypes.vcf
+samtools mpileup -f /home/sj577/Documents/test_ngs/ref_genome/pnref_genome.fasta  *.sorted.bam > hun_genotypes.vcf
+
+#Convert vcf file to vcf.gz
+#Load tabix module
+module load tabix
+#gzip the vcf file with bgzip command
+bgzip hun_genotypes.vcf
+#The above command makes the file isr_genotypes.vcf.gz
+#make the index file
+tabix -p hun_genotypes.vcf.gz
 
 #Call the variants from the genotypes
 bcftools call --ploidy 1 -vm -Ov hun_genotypes.vcf.gz > hun_variants.vcf
