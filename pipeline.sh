@@ -37,7 +37,7 @@ trim_galore -q 30 --fastqc --paired -o /home/sj577/project/test_qcresults $1 $2
 
 #Bowtie2
 cd /home/sj577/project/test_qcresults 
-bowtie2 -x /home/sj577/Documents/test_ngs/ref_genome/pnrefdb -1 *${A///}_*val_1*.fq.gz -2 *${A///}_*val_2*.fq.gz -S /home/sj577/project/test_samfiles/${samplename}.sam --no-unal 
+bowtie2 -x /home/sj577/Documents/test_ngs/ref_genome/pnrefdb -1 *${filename}_*val_1*.fq.gz -2 *${filename}_*val_2*.fq.gz -S /home/sj577/project/test_samfiles/${samplename}.sam --no-unal 
 
 
 
