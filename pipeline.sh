@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Load stdenv module required for sequence analysis tools
+module load StdEnv
+
 #The script takes fastq filenames as arguments. Echo the filenames on the terminal and log file:
 #Also echo the name of script in the begining:
 echo $0
@@ -36,8 +39,24 @@ source activate test_ngs
 trim_galore -q 30 --fastqc --paired -o /home/sj577/project/test_qcresults $1 $2
 
 #Bowtie2
+#load Bowtie2 module
+module load Bowtie2
+
 cd /home/sj577/project/test_qcresults 
 bowtie2 -x /home/sj577/Documents/test_ngs/ref_genome/pnrefdb -1 *${filename}_*val_1*.fq.gz -2 *${filename}_*val_2*.fq.gz -S /home/sj577/project/test_samfiles/${samplename}.sam --no-unal 
 
+#Samtools for converting sam files to bam format
+#load samtools module
+module load SAMtools
+#convert samfiles to bam
+samtools view -S -b ${samplename}.sam > ${samplename}.bam
+#Make sorted bam files
+samtools sort ${samplename}.bam -o ${samplename}.sorted.bam
+#Index sorted bam files
+samtools index ${samplename}.sorted.bam
 
+#Copy the bam files from samfiles folder to bamfiles
+cp *bam /home/sj577/project/test_bamfiles/
 
+#Copy the bam index files with the extension bai from samfiles folder to bamfiles
+cp *bam.bai /home/sj577/project/test_bamfiles/
