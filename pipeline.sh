@@ -16,7 +16,7 @@ echo $filepath
 A=$filepath
 #A="$(cut -d'/' -f2 <<< $filepath)"
 #B="$(cut -d'_' -f3 <<< $filepath)"
-#echo ${A///}
+echo ${A///}
 #echo ${B///}
 
 #Combine A and B to make samplenames for the output files
@@ -66,10 +66,14 @@ echo "samtools run complete...."
 echo "Copying files to bamfiles folder...."
 
 #Copy the bam files from samfiles folder to bamfiles
-cp *bam /home/sj577/project/test_bamfiles/
+cp ${samplename}.sorted.bam /home/sj577/project/test_bamfiles/
 
 #Copy the bam index files with the extension bai from samfiles folder to bamfiles
-cp *bam.bai /home/sj577/project/test_bamfiles/
+cp ${samplename}.sorted.bam.bai /home/sj577/project/test_bamfiles/
 
 echo "Transfer complete...."
+
+#Make vcf file for the sample
+samtools mpileup -f /home/sj577/Documents/test_ngs/ref_genome/pnref_genome.fasta $samplename}.sorted.bam > /home/sj577/project/test_vcf/${samplename}.vcf
+
 echo "Pipeline run for sample ${samplename} completed successfully...."
