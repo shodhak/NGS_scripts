@@ -77,13 +77,13 @@ echo "Transfer complete...."
 samtools mpileup -f /home/sj577/Documents/test_ngs/ref_genome/pnref_genome.fasta ${samplename}.sorted.bam > /home/sj577/project/test_vcf/${samplename}.vcf
 
 #cd into the folder containing vcf files
-cd /home/sj577/project/test_vcf
+#cd /home/sj577/project/test_vcf
 #Convert vcf file to vcf.gz
 #Load tabix module
-module load tabix
+#module load tabix
 #gzip the vcf file with bgzip command
-bgzip ${samplename}.vcf
+#bgzip ${samplename}.vcf
 #The above command makes the file isr_genotypes.vcf.gz
 #make the index file
-tabix -p ${samplename}.vcf.gz
+#tabix -p ${samplename}.vcf.gz
 echo "Pipeline run for sample ${samplename} completed successfully...."
