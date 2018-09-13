@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for dir in /home/sj577/project/all_sequences/*/
+for dir in /home/sj577/project/all_sequences/*
 	do
 		#echo $dir
 		echo "sh pipeline.sh $dir/Unaligned/*R1*.fastq.gz $dir/Unaligned/*R2*.fastq.gz" >> jobfile.txt
